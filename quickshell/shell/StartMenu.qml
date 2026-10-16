@@ -82,7 +82,7 @@ PanelWindow {
       anchors.margins: Theme.spaceMd
       spacing: Theme.spaceMd
 
-      StartAppList {
+      AppList {
         id: apps
         Layout.fillWidth: true
         Layout.fillHeight: true

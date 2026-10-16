@@ -3,15 +3,17 @@
 A small, keyboard-friendly floating desktop for NixOS, built from two parts:
 
 - **Wayfire** as the compositor (`compositor/`): floating windows, thin borders, workspaces on a 2x2 grid, a few Lua scripts for the keys.
-- **Quickshell** as the shell (`quickshell/`): panel, start menu, tray popups, Settings app, lock screen, notifications and a screen-share picker. All QML, no daemons of its own.
+- **Quickshell** as the shell (`quickshell/`): panel, start menu, a centered app launcher, tray popups, a Settings app, lock screen, notifications, the wallpaper and a screen-share picker. All QML, no daemons of its own.
 
 It is meant to feel like a lightweight KDE without Plasma: a taskbar with a start menu, a workspace pager, tray popups for Wi-Fi, sound, Bluetooth, battery, clipboard history and calendar, and a Settings window.
 
-| Start menu | Calendar |
+| Start menu | Launcher (`Super+Esc`) |
 |---|---|
-| ![Start menu](screenshots/start-menu.png) | ![Calendar](screenshots/popup-calendar.png) |
-| **Battery and brightness** | **Settings: Sound** |
-| ![Battery](screenshots/popup-battery.png) | ![Sound settings](screenshots/page-sound.png) |
+| ![Start menu](screenshots/start-menu.png) | ![Launcher](screenshots/launcher.png) |
+| **Settings: Appearance** | **Calendar** |
+| ![Appearance](screenshots/page-appearance.png) | ![Calendar](screenshots/popup-calendar.png) |
+| **Lock screen** | **Battery and brightness** |
+| ![Lock screen](screenshots/lock.png) | ![Battery](screenshots/popup-battery.png) |
 
 ## Install (NixOS + home-manager)
 
@@ -35,7 +37,7 @@ imports = [ ./path/to/normal-shell/nix/nixos.nix ];
 imports = [ ./path/to/normal-shell/nix/home.nix ];
 ```
 
-**4. Wallpaper.** Put an image at `~/Pictures/wallpaper.jpg`, or change the path in `nix/home.nix`.
+**4. Wallpaper.** Put pictures in `~/Pictures` and pick one in Settings > Appearance after you log in. There is nothing to configure in Nix.
 
 **5. Rebuild and log in.**
 
@@ -47,14 +49,14 @@ Log in through tuigreet and pick it as the session (it starts `wayfire`).
 
 ### Make it yours
 
-Edit these before the first login. The defaults are for a Brazilian keyboard on a 2880x1800 laptop screen.
+Edit these before the first login. The defaults are for a Brazilian keyboard on a 2880x1800 laptop screen. After that, most look-and-feel choices are in Settings.
 
 | What | Where |
 |---|---|
-| Keyboard layout, screen mode and scale, cursor theme | `compositor/wayfire.ini` (`[input]`, `[output:eDP-1]`) |
-| Colours and font | `quickshell/theme.json` |
+| Default keyboard layout, screen mode and scale, cursor theme | `compositor/wayfire.ini` (`[input]`, `[output:eDP-1]`) |
+| Palette (16 colors) and default font | `quickshell/theme.json` |
 | Terminal and file manager | `[command]` in `compositor/wayfire.ini` (`foot`, `thunar`) |
-| Wallpaper | `nix/home.nix` |
+| Which palette color each part uses, font and text size, wallpaper, keyboard layout, time zone, session language | Settings (saved in `~/.config/quickshell/prefs.json`) |
 
 After changing `theme.json`, reload the panel without restarting it:
 
@@ -73,6 +75,7 @@ The pieces are plain files, so you can wire them up by hand: link `quickshell/` 
 | Keys | Action |
 |---|---|
 | `Super` | Start menu |
+| `Super+Esc` | Quick launcher, centered on the screen |
 | `Super+Enter` / `Super+E` | Terminal / file manager |
 | `Super+H J K L` | Focus the next window in that direction; at the edge, switch workspace |
 | `Super+Alt+H J K L` | Send the focused window to the neighbouring workspace |
@@ -104,10 +107,15 @@ quickshell/
   modules/      one folder per feature (network, sound, bluetooth, battery, ...)
   rules.md      the rules for adding code
   dev/          a headless test setup
+.docs/        short docs: architecture, theming, compositor, state
 nix/          home-manager and NixOS wiring
 ```
 
 A feature is a folder in `modules/` with a tray button, a popup and a Settings page that share their parts. `quickshell/rules.md` explains the conventions and `quickshell/new-module.sh <name>` scaffolds a new one.
+
+## Docs
+
+The `.docs/` folder explains how it fits together, one short file per topic. Start with `.docs/README.md`.
 
 ## Developing
 
@@ -116,7 +124,8 @@ A feature is a folder in `modules/` with a tray button, a popup and a Settings p
 ## Known limits
 
 - Screen sharing offers whole screens only. Wayfire does not expose window capture to the portal.
-- Settings cannot change the time zone, language or keyboard layout; those stay declarative in NixOS and are shown read-only.
+- On NixOS, Settings changes to the time zone (until reboot) and the language (until logout) are temporary. Make them permanent in your configuration. See `.docs/nixos.md`.
+- The title text color of an already open window updates only when its title changes. See `.docs/theming.md`.
 - Tested on a single laptop (Intel graphics, NixOS unstable). Expect rough edges elsewhere.
 
 ## License

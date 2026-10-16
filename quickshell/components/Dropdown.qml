@@ -15,6 +15,11 @@ Item {
     return value === undefined ? "" : String(value)
   }
 
+  readonly property var currentSwatch: {
+    for (let i = 0; i < options.length; i++) if (options[i].value === value) return options[i].swatch
+    return undefined
+  }
+
   implicitWidth: Theme.fieldMd
   implicitHeight: Theme.inputHeight
   Layout.preferredWidth: Theme.fieldMd
@@ -25,32 +30,26 @@ Item {
     picked(chosen)
   }
 
-  function place() {
-    const spot = head.mapToItem(layer, 0, 0)
-    panel.x = spot.x
-    panel.width = head.width
-    const below = spot.y + head.height
-    panel.y = below + panel.height > layer.height ? Math.max(0, spot.y - panel.height) : below
-  }
-
-  function focusCurrent() {
-    let index = 0
-    for (let i = 0; i < options.length; i++) if (options[i].value === value) index = i
-    list.positionViewAtIndex(index, ListView.Contain)
-    const item = list.itemAtIndex(index)
-    if (item) item.forceActiveFocus()
-  }
-
-  onExpandedChanged: if (expanded) { place(); Qt.callLater(focusCurrent) }
-
   Clickable {
     id: head
     anchors.fill: parent
     idleColor: Theme.surface
     onActivated: root.expanded = !root.expanded
-    Label {
+    Rectangle {
+      id: headSwatch
+      visible: root.currentSwatch !== undefined
       anchors.verticalCenter: parent.verticalCenter
       anchors.left: parent.left
+      anchors.leftMargin: Theme.spaceMd
+      width: Theme.swatchSize
+      height: Theme.swatchSize
+      color: root.currentSwatch !== undefined ? root.currentSwatch : "transparent"
+      border.width: 1
+      border.color: Theme.muted
+    }
+    Label {
+      anchors.verticalCenter: parent.verticalCenter
+      anchors.left: headSwatch.visible ? headSwatch.right : parent.left
       anchors.leftMargin: Theme.spaceMd
       anchors.right: arrow.left
       text: root.currentLabel
@@ -66,43 +65,75 @@ Item {
     }
   }
 
-  // The option list lives on the window's top layer, so it floats over the page instead of pushing it down.
-  Item {
-    id: layer
-    visible: root.expanded
+  // The option list is built only while it is open, on the window's top layer, so it floats over the page.
+  Loader {
+    active: root.expanded
     parent: Window.window ? Window.window.contentItem : root
     anchors.fill: parent
     z: 10000
+    onLoaded: { item.place(); Qt.callLater(item.focusCurrent) }
 
-    MouseArea { anchors.fill: parent; onClicked: root.expanded = false }
+    sourceComponent: Item {
+      id: layer
 
-    Rectangle {
-      id: panel
-      height: Math.min(list.contentHeight, root.maxRows * Theme.rowHeight)
-      color: Theme.surface
+      function place() {
+        const spot = head.mapToItem(layer, 0, 0)
+        panel.x = spot.x
+        panel.width = head.width
+        const below = spot.y + head.height
+        panel.y = below + panel.height > layer.height ? Math.max(0, spot.y - panel.height) : below
+      }
 
-      ListView {
-        id: list
-        anchors.fill: parent
-        clip: true
-        interactive: contentHeight > height
-        boundsBehavior: Flickable.StopAtBounds
-        model: root.options
-        delegate: Clickable {
-          required property var modelData
-          width: list.width
-          height: Theme.rowHeight
-          idleColor: Theme.surface
-          onActivated: root.choose(modelData.value)
-          Keys.onEscapePressed: root.expanded = false
-          Keys.onDownPressed: { const n = nextItemInFocusChain(true); if (n) n.forceActiveFocus() }
-          Keys.onUpPressed: { const n = nextItemInFocusChain(false); if (n) n.forceActiveFocus() }
-          Label {
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.left: parent.left
-            anchors.leftMargin: Theme.spaceMd
-            text: modelData.label
-            color: modelData.value === root.value ? Theme.accent : Theme.fg
+      function focusCurrent() {
+        let index = 0
+        for (let i = 0; i < root.options.length; i++) if (root.options[i].value === root.value) index = i
+        list.positionViewAtIndex(index, ListView.Contain)
+        const row = list.itemAtIndex(index)
+        if (row) row.forceActiveFocus()
+      }
+
+      MouseArea { anchors.fill: parent; onClicked: root.expanded = false }
+
+      Rectangle {
+        id: panel
+        height: Math.min(list.contentHeight, root.maxRows * Theme.rowHeight)
+        color: Theme.surface
+
+        ListView {
+          id: list
+          anchors.fill: parent
+          clip: true
+          interactive: contentHeight > height
+          boundsBehavior: Flickable.StopAtBounds
+          model: root.options
+          delegate: Clickable {
+            required property var modelData
+            width: list.width
+            height: Theme.rowHeight
+            idleColor: Theme.surface
+            onActivated: root.choose(modelData.value)
+            Keys.onEscapePressed: root.expanded = false
+            Keys.onDownPressed: { const n = nextItemInFocusChain(true); if (n) n.forceActiveFocus() }
+            Keys.onUpPressed: { const n = nextItemInFocusChain(false); if (n) n.forceActiveFocus() }
+            Rectangle {
+              id: rowSwatch
+              visible: modelData.swatch !== undefined
+              anchors.verticalCenter: parent.verticalCenter
+              anchors.left: parent.left
+              anchors.leftMargin: Theme.spaceMd
+              width: Theme.swatchSize
+              height: Theme.swatchSize
+              color: modelData.swatch !== undefined ? modelData.swatch : "transparent"
+              border.width: 1
+              border.color: Theme.muted
+            }
+            Label {
+              anchors.verticalCenter: parent.verticalCenter
+              anchors.left: rowSwatch.visible ? rowSwatch.right : parent.left
+              anchors.leftMargin: Theme.spaceMd
+              text: modelData.label
+              color: modelData.value === root.value ? Theme.accent : Theme.fg
+            }
           }
         }
       }

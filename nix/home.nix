@@ -17,12 +17,15 @@ in
   xdg.configFile."wayfire/edge-focus.lua".source = link "compositor/edge-focus.lua";
   xdg.configFile."wayfire/workspace-watch.lua".source = link "compositor/workspace-watch.lua";
   xdg.configFile."wayfire/window.lua".source = link "compositor/window.lua";
+  xdg.configFile."wayfire/theme.lua".source = link "compositor/theme.lua";
+  xdg.configFile."wayfire/input.lua".source = link "compositor/input.lua";
   xdg.configFile."wayfire/wfipc.lua".source = link "compositor/wfipc.lua";
   xdg.configFile."wayfire.ini".text =
     builtins.replaceStrings [ "@home@" ] [ home ] (builtins.readFile ../compositor/wayfire.ini);
 
   xdg.configFile."quickshell/panel".source = link "quickshell";
   xdg.configFile."quickshell/theme.json".source = link "quickshell/theme.json";
+  xdg.configFile."quickshell/xkb-base.lst".source = "${pkgs.xkeyboard-config}/share/X11/xkb/rules/base.lst";
 
   xdg.configFile."xdg-desktop-portal-wlr/config".text = ''
     [screencast]
@@ -45,20 +48,6 @@ in
       { timeout = 600; command = "${pkgs.systemd}/bin/systemctl suspend"; }
     ];
     events.before-sleep = "${pkgs.quickshell}/bin/quickshell -c panel ipc call lock lock";
-  };
-
-  systemd.user.services.swaybg = {
-    Unit = {
-      Description = "Wallpaper";
-      PartOf = [ "graphical-session.target" ];
-      After = [ "graphical-session.target" ];
-    };
-    Service = {
-      ExecStart = "${pkgs.swaybg}/bin/swaybg -i ${home}/Pictures/wallpaper.jpg -m fill";
-      Restart = "on-failure";
-      RestartSec = 1;
-    };
-    Install.WantedBy = [ "graphical-session.target" ];
   };
 
   home.packages = with pkgs; [

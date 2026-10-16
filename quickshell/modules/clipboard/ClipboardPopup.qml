@@ -10,6 +10,7 @@ ColumnLayout {
   spacing: Theme.spaceSm
 
   property var entries: []
+  property string lastList: ""
   property string query: ""
   property bool confirmClear: false
   readonly property var shown: entries.filter(e => query === "" || e.text.toLowerCase().indexOf(query.toLowerCase()) >= 0).slice(0, 60)
@@ -25,6 +26,8 @@ ColumnLayout {
     id: lister
     command: ["cliphist", "list"]
     onFinished: (code, text) => {
+      if (text === root.lastList) return
+      root.lastList = text
       const out = []
       for (const line of text.split("\n")) {
         const tab = line.indexOf("\t")

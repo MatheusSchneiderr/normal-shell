@@ -92,11 +92,12 @@ Scope {
           visible: root.shotReady
           source: root.shotReady ? "file://" + root.shot : ""
           fillMode: Image.PreserveAspectCrop
+          sourceSize.width: Math.max(1, Math.round(width / 12))
           cache: false
           asynchronous: true
         }
 
-        Rectangle { anchors.fill: parent; color: Theme.bg; opacity: root.shotReady ? 0.9 : 1.0 }
+        Rectangle { anchors.fill: parent; color: Theme.bg; opacity: root.shotReady ? 0.75 : 1.0 }
 
         SystemClock { id: tick; precision: Prefs.showSeconds ? SystemClock.Seconds : SystemClock.Minutes }
 

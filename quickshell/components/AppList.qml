@@ -9,6 +9,7 @@ ColumnLayout {
   id: root
   signal launched()
   signal settingsRequested()
+  property bool showSettings: true
 
   spacing: Theme.spaceMd
 
@@ -35,6 +36,7 @@ ColumnLayout {
     }
 
     Clickable {
+      visible: root.showSettings
       Layout.preferredWidth: Theme.buttonHeight
       Layout.preferredHeight: Theme.buttonHeight
       idleColor: Theme.surface
@@ -50,11 +52,23 @@ ColumnLayout {
     Layout.minimumHeight: Theme.startMenuHeight / 3
     clip: true
     currentIndex: 0
+    property real mouseX: -1
+    property real mouseY: -1
     highlightMoveDuration: 0
+    // Names that start with the text come first, then names with a word that starts with it, then the rest
+    function rank(name, query) {
+      const n = name.toLowerCase()
+      if (n.startsWith(query)) return 0
+      return n.includes(" " + query) ? 1 : 2
+    }
+
     model: ScriptModel {
-      values: DesktopEntries.applications.values
-        .filter(e => !e.noDisplay && e.name.toLowerCase().includes(search.text.toLowerCase()))
-        .sort((a, b) => a.name.localeCompare(b.name))
+      values: {
+        const query = search.text.toLowerCase()
+        return DesktopEntries.applications.values
+          .filter(e => !e.noDisplay && e.name.toLowerCase().includes(query))
+          .sort((a, b) => list.rank(a.name, query) - list.rank(b.name, query) || a.name.localeCompare(b.name))
+      }
     }
     delegate: Rectangle {
       required property var modelData
@@ -80,7 +94,14 @@ ColumnLayout {
       MouseArea {
         anchors.fill: parent
         hoverEnabled: true
-        onEntered: list.currentIndex = index
+        onPositionChanged: mouse => {
+          // The list moving under a resting mouse also reports a position; only a real move may change the selection
+          const spot = mapToItem(null, mouse.x, mouse.y)
+          const moved = list.mouseX >= 0 && (spot.x !== list.mouseX || spot.y !== list.mouseY)
+          list.mouseX = spot.x
+          list.mouseY = spot.y
+          if (moved) list.currentIndex = index
+        }
         onClicked: { modelData.execute(); root.launched() }
       }
     }
