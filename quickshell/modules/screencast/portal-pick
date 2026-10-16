@@ -1,0 +1,13 @@
+#!/bin/sh
+# Chooser for xdg-desktop-portal-wlr (chooser_type = dmenu): reads the list of screens on stdin,
+# shows the Quickshell picker, prints the chosen line on stdout (nothing = declined).
+# QS_ARGS lets tests point at another Quickshell instance (default: -c panel).
+export PATH="/etc/profiles/per-user/$(id -un)/bin:/run/current-system/sw/bin:$PATH"
+dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/qs-picker"
+mkdir -p "$dir"
+cat > "$dir/items"
+rm -f "$dir/choice"
+mkfifo "$dir/choice" || exit 1
+# shellcheck disable=SC2086
+quickshell ${QS_ARGS:--c panel} ipc call picker ask "$dir/items" "$dir/choice" || exit 1
+cat "$dir/choice"

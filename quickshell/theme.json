@@ -1,0 +1,13 @@
+{
+  "bg": "#181818",
+  "surface": "#282828",
+  "hover": "#383838",
+  "muted": "#585858",
+  "fg": "#d8d8d8",
+  "bright": "#f8f8f8",
+  "accent": "#7cafc2",
+  "danger": "#ab4642",
+  "warning": "#f7ca88",
+  "success": "#a1b56c",
+  "font": "monospace"
+}
