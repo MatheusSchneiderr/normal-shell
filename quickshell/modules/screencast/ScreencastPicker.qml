@@ -77,7 +77,7 @@ Scope {
           anchors.centerIn: parent
           width: Theme.popupWidth + Theme.spaceLg * 2
           height: column.implicitHeight + Theme.popupPadding * 2
-          color: Theme.bg
+          color: Theme.fillWindow
 
           MouseArea { anchors.fill: parent }
 
@@ -99,7 +99,7 @@ Scope {
               }
             }
 
-            Label { text: "Enter to share, Esc to cancel"; color: Theme.muted; font.pixelSize: Theme.fontSmall }
+            Label { text: "Enter to share, Esc to cancel"; color: Theme.textHint; font.pixelSize: Theme.fontSmall }
           }
         }
       }

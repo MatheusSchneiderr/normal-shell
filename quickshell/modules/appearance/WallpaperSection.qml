@@ -65,7 +65,7 @@ ColumnLayout {
   Label {
     visible: root.images.length === 0
     text: "No images in this folder."
-    color: Theme.muted
+    color: Theme.textHint
   }
 
   Flow {
@@ -78,7 +78,7 @@ ColumnLayout {
         required property string modelData
         width: Theme.thumbWidth
         height: Theme.thumbHeight
-        idleColor: Theme.surface
+        idleColor: Theme.fillCard
         onActivated: Prefs.wallpaper = modelData
 
         Image {
@@ -95,7 +95,7 @@ ColumnLayout {
           anchors.fill: parent
           color: "transparent"
           border.width: 2
-          border.color: Theme.accent
+          border.color: Theme.selected
           visible: modelData === Prefs.wallpaper
         }
       }

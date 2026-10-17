@@ -13,6 +13,7 @@ QtObject {
   readonly property string bellOff: "\uf1f6"
   readonly property string bluetooth: "\uf293"
   readonly property string bolt: "\uf0e7"
+  readonly property string camera: "\uf030"
   readonly property string caretDown: "\uf0d7"
   readonly property string caretUp: "\uf0d8"
   readonly property string check: "\uf00c"

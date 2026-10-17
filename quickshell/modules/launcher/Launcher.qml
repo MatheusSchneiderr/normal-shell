@@ -31,7 +31,7 @@ Scope {
         anchors.centerIn: parent
         width: Theme.launcherWidth
         height: Theme.launcherHeight
-        color: Theme.bg
+        color: Theme.fillWindow
 
         Keys.onEscapePressed: root.active = false
 

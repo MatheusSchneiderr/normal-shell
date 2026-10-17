@@ -20,7 +20,7 @@ RowLayout {
       required property var modelData
       Layout.fillWidth: true
       Layout.fillHeight: true
-      idleColor: Theme.surface
+      idleColor: Theme.fillCard
       onActivated: root.chosen(modelData)
       Keys.onUpPressed: root.searchRequested()
       Keys.onLeftPressed: { const n = nextItemInFocusChain(false); if (n) n.forceActiveFocus() }
@@ -32,7 +32,7 @@ RowLayout {
         Glyph {
           Layout.alignment: Qt.AlignHCenter
           text: modelData.icon
-          color: modelData.id === "shutdown" ? Theme.danger : Theme.accent
+          color: modelData.id === "shutdown" ? Theme.danger : Theme.selected
         }
         Label {
           Layout.alignment: Qt.AlignHCenter

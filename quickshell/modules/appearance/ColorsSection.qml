@@ -12,6 +12,7 @@ ColumnLayout {
   property bool pending: false
   property int countdown: 10
   property var before: ({})
+  property var opened: ({})
 
   readonly property var slotOptions: Theme.slots.map(s => ({ label: s.id + "  " + s.label, value: s.id, swatch: Theme.slotColor(s.id) }))
 
@@ -30,6 +31,8 @@ ColumnLayout {
     apply()
   }
 
+  function toggle(name, open) { opened = Object.assign({}, opened, { [name]: open }) }
+
   function keep() { pending = false }
   function revert() { Prefs.colors = before; pending = false }
 
@@ -43,7 +46,7 @@ ColumnLayout {
   SectionHeader { text: "COLORS" }
   Label {
     text: "Pick which palette color each part of the desktop uses. The palette comes from your theme."
-    color: Theme.muted
+    color: Theme.textHint
     wrapMode: Text.Wrap
     Layout.fillWidth: true
   }
@@ -52,7 +55,7 @@ ColumnLayout {
     visible: root.pending
     Layout.fillWidth: true
     Layout.preferredHeight: Theme.buttonHeight
-    color: Theme.surface
+    color: Theme.fillCard
     RowLayout {
       anchors.fill: parent
       anchors.leftMargin: Theme.spaceMd
@@ -67,16 +70,31 @@ ColumnLayout {
   Repeater {
     model: root.groups
     delegate: ColumnLayout {
+      id: group
       required property var modelData
+      required property int index
+      readonly property bool expanded: root.opened[modelData.name] !== undefined ? root.opened[modelData.name] : index === 0
       Layout.fillWidth: true
       spacing: Theme.spaceMd
 
-      SectionHeader { text: modelData.name.toUpperCase() }
+      Clickable {
+        Layout.fillWidth: true
+        Layout.preferredHeight: Theme.rowHeight
+        onActivated: root.toggle(group.modelData.name, !group.expanded)
+        RowLayout {
+          anchors.fill: parent
+          anchors.leftMargin: Theme.spaceSm
+          anchors.rightMargin: Theme.spaceSm
+          SectionHeader { Layout.fillWidth: true; text: group.modelData.name.toUpperCase() + "  " + group.modelData.items.length }
+          Glyph { text: group.expanded ? Icons.caretUp : Icons.caretDown; color: Theme.iconDim }
+        }
+      }
 
       Repeater {
-        model: modelData.items
+        model: group.expanded ? modelData.items : []
         delegate: FormRow {
           required property var modelData
+          Layout.leftMargin: Theme.spaceLg * 2
           label: modelData.label
           hint: modelData.hint
           Dropdown {

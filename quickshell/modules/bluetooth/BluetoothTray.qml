@@ -11,6 +11,6 @@ StatusButton {
   visible: adapter !== null
   glyph: Icons.bluetooth
   label: connected > 0 ? String(connected) : ""
-  tint: (adapter && adapter.enabled) ? Theme.fg : Theme.muted
+  dim: !(adapter && adapter.enabled)
   popup: "bluetooth"
 }

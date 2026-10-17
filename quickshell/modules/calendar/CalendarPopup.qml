@@ -42,14 +42,14 @@ ColumnLayout {
 
   Label {
     text: Qt.formatDateTime(tick.date, Prefs.timeFormat)
-    color: Theme.bright
+    color: Theme.textTitle
     font.pixelSize: Theme.fontDisplay
     font.bold: true
   }
 
   Label {
     text: Qt.formatDate(root.today, "dddd, d MMMM yyyy")
-    color: Theme.fg
+    color: Theme.textBody
     font.pixelSize: Theme.fontBody
     Layout.bottomMargin: Theme.spaceSm
   }
@@ -62,7 +62,7 @@ ColumnLayout {
       Layout.preferredWidth: Theme.rowHeight
       Layout.preferredHeight: Theme.rowHeight
       onActivated: root.shift(-1)
-      Glyph { anchors.centerIn: parent; text: Icons.chevronLeft; font.pixelSize: Theme.fontLarge }
+      Glyph { centered: true; text: Icons.chevronLeft; font.pixelSize: Theme.fontLarge }
     }
 
     Clickable {
@@ -72,7 +72,7 @@ ColumnLayout {
       Label {
         anchors.centerIn: parent
         text: Qt.formatDate(new Date(root.year, root.month, 1), "MMMM yyyy")
-        color: root.onCurrentMonth ? Theme.fg : Theme.accent
+        color: root.onCurrentMonth ? Theme.textBody : Theme.selected
         font.pixelSize: Theme.fontLarge
       }
     }
@@ -81,7 +81,7 @@ ColumnLayout {
       Layout.preferredWidth: Theme.rowHeight
       Layout.preferredHeight: Theme.rowHeight
       onActivated: root.shift(1)
-      Glyph { anchors.centerIn: parent; text: Icons.chevronRight; font.pixelSize: Theme.fontLarge }
+      Glyph { centered: true; text: Icons.chevronRight; font.pixelSize: Theme.fontLarge }
     }
   }
 
@@ -99,7 +99,7 @@ ColumnLayout {
         Layout.preferredWidth: 1
         horizontalAlignment: Text.AlignHCenter
         text: modelData
-        color: Theme.muted
+        color: Theme.textHint
         font.pixelSize: Theme.fontSmall
         font.bold: true
       }
@@ -116,19 +116,19 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.preferredWidth: 1
         Layout.preferredHeight: Theme.rowHeight
-        color: isToday ? Theme.bright : "transparent"
+        color: isToday ? Theme.fillPrimary : "transparent"
 
         Label {
           anchors.centerIn: parent
           text: inMonth ? day : (day < 1 ? root.previousLength + day : day - root.monthLength)
-          color: isToday ? Theme.bg : (inMonth ? Theme.fg : Theme.muted)
+          color: isToday ? Theme.textPrimary : (inMonth ? Theme.textBody : Theme.textHint)
           font.bold: isToday
         }
       }
     }
   }
 
-  Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; Layout.topMargin: Theme.spaceSm; color: Theme.hover }
+  Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; Layout.topMargin: Theme.spaceSm; color: Theme.lineDivider }
 
   RowLayout {
     Layout.fillWidth: true
@@ -138,17 +138,17 @@ ColumnLayout {
       spacing: 0
       Label {
         text: "Keyboard  " + (Regional.layout !== "" ? (Regional.layout + " " + Regional.variant).toUpperCase() : "-")
-        color: Theme.fg
+        color: Theme.textBody
         font.pixelSize: Theme.fontSmall
       }
       Label {
         text: "Region  " + (root.formats !== "" ? root.formats : "-") + (root.language !== "" && root.language !== root.formats ? "  (" + root.language + ")" : "")
-        color: Theme.fg
+        color: Theme.textBody
         font.pixelSize: Theme.fontSmall
       }
       Label {
         text: Regional.zone
-        color: Theme.muted
+        color: Theme.textHint
         font.pixelSize: Theme.fontSmall
       }
     }
@@ -158,9 +158,9 @@ ColumnLayout {
     Clickable {
       Layout.preferredWidth: Theme.buttonHeight
       Layout.preferredHeight: Theme.buttonHeight
-      idleColor: Theme.surface
+      idleColor: Theme.fillCard
       onActivated: Ui.openSettings("datetime")
-      Glyph { anchors.centerIn: parent; text: Icons.gear; color: Theme.accent }
+      Glyph { centered: true; text: Icons.gear; color: Theme.selected }
     }
   }
 }

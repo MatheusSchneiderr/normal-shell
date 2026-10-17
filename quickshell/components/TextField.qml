@@ -14,7 +14,7 @@ Rectangle {
 
   implicitWidth: Theme.fieldMd
   implicitHeight: Theme.inputHeight
-  color: Theme.surface
+  color: Theme.fillCard
   activeFocusOnTab: true
   onActiveFocusChanged: if (activeFocus) input.forceActiveFocus()
 
@@ -25,7 +25,7 @@ Rectangle {
     anchors.rightMargin: Theme.spaceMd
     verticalAlignment: TextInput.AlignVCenter
     echoMode: root.password ? TextInput.Password : TextInput.Normal
-    color: Theme.fg
+    color: Theme.textInput
     selectByMouse: true
     font.family: Theme.font
     font.pixelSize: root.fontSize
@@ -38,7 +38,7 @@ Rectangle {
       visible: input.text === ""
       anchors.verticalCenter: parent.verticalCenter
       text: root.placeholder
-      color: Theme.muted
+      color: Theme.textHint
       font: input.font
     }
   }
@@ -48,7 +48,7 @@ Rectangle {
     anchors.right: parent.right
     anchors.bottom: parent.bottom
     height: 2
-    color: Theme.accent
+    color: Theme.selected
     visible: input.activeFocus
   }
 }

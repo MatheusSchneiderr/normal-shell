@@ -105,7 +105,7 @@ SettingsPage {
   StatusMessage { text: root.message; ok: root.good }
 
   SectionHeader { text: "PRINTERS" }
-  Label { visible: root.printers.length === 0; text: "No printers configured"; color: Theme.muted }
+  Label { visible: root.printers.length === 0; text: "No printers configured"; color: Theme.textHint }
 
   Repeater {
     model: root.printers
@@ -132,7 +132,7 @@ SettingsPage {
         Layout.bottomMargin: Theme.spaceMd
         spacing: Theme.spaceSm
 
-        Label { text: modelData.uri; color: Theme.muted; font.pixelSize: Theme.fontSmall; elide: Text.ElideMiddle; Layout.fillWidth: true }
+        Label { text: modelData.uri; color: Theme.textHint; font.pixelSize: Theme.fontSmall; elide: Text.ElideMiddle; Layout.fillWidth: true }
 
         RowLayout {
           spacing: Theme.spaceMd
@@ -174,7 +174,7 @@ SettingsPage {
   }
 
   SectionHeader { text: "PRINT QUEUE" }
-  Label { visible: root.jobs.length === 0; text: "No pending jobs"; color: Theme.muted }
+  Label { visible: root.jobs.length === 0; text: "No pending jobs"; color: Theme.textHint }
   Repeater {
     model: root.jobs
     delegate: RowLayout {
@@ -182,7 +182,7 @@ SettingsPage {
       Layout.fillWidth: true
       spacing: Theme.spaceMd
       Label { text: modelData.printer + " #" + modelData.id; Layout.preferredWidth: Theme.fieldSm; elide: Text.ElideRight }
-      Label { text: modelData.owner + "   " + Math.round(modelData.size / 1024) + " KB   " + modelData.when; color: Theme.muted; Layout.fillWidth: true; elide: Text.ElideRight }
+      Label { text: modelData.owner + "   " + Math.round(modelData.size / 1024) + " KB   " + modelData.when; color: Theme.textHint; Layout.fillWidth: true; elide: Text.ElideRight }
       ActionButton { text: "Cancel"; onActivated: root.act(["cancel", modelData.printer + "-" + modelData.id], "Job cancelled") }
     }
   }
@@ -223,7 +223,7 @@ SettingsPage {
         onActivated: { if (!root.scanning) { root.scanning = true; discover.run() } }
       }
     }
-    Label { visible: !root.scanning && root.found.length === 0 && discover.output !== ""; text: "No printers found. Use the address field for a network printer."; color: Theme.muted }
+    Label { visible: !root.scanning && root.found.length === 0 && discover.output !== ""; text: "No printers found. Use the address field for a network printer."; color: Theme.textHint }
     Repeater {
       model: root.found
       delegate: ListRow {

@@ -73,7 +73,7 @@ PanelWindow {
     y: parent.height - height - Theme.barHeight
     width: Theme.startMenuWidth
     height: Theme.startMenuHeight
-    color: Theme.bg
+    color: Theme.fillWindow
 
     Keys.onEscapePressed: { if (menu.pending !== "") menu.pending = ""; else menu.closeRequested() }
 
@@ -90,7 +90,7 @@ PanelWindow {
         onSettingsRequested: { menu.closeRequested(); menu.settingsRequested() }
       }
 
-      Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Theme.muted }
+      Rectangle { Layout.fillWidth: true; Layout.preferredHeight: 1; color: Theme.lineDivider }
 
       PowerRow {
         actions: menu.actions

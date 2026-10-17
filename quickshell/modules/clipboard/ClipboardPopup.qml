@@ -84,7 +84,7 @@ ColumnLayout {
         anchors.leftMargin: Theme.spaceSm
         anchors.rightMargin: Theme.spaceSm
         spacing: Theme.spaceMd
-        Glyph { text: modelData.image ? Icons.image : Icons.paste; color: Theme.accent }
+        Glyph { text: modelData.image ? Icons.image : Icons.paste; color: Theme.selected }
         Label { Layout.fillWidth: true; text: modelData.text; elide: Text.ElideRight }
       }
     }
@@ -93,7 +93,7 @@ ColumnLayout {
   Label {
     visible: root.shown.length === 0
     text: root.entries.length === 0 ? "Clipboard history is empty" : "No matches"
-    color: Theme.muted
+    color: Theme.textHint
     font.pixelSize: Theme.fontBody
     Layout.leftMargin: Theme.spaceSm
   }

@@ -26,7 +26,7 @@ ColumnLayout {
   Label {
     visible: Notifs.count === 0
     text: "No notifications"
-    color: Theme.muted
+    color: Theme.textHint
     Layout.leftMargin: Theme.spaceSm
   }
 

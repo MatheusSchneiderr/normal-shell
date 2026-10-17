@@ -4,7 +4,7 @@
 # Usage: dev/smoke.sh [--shots DIR]     (DIR receives one PNG per popup/page)
 set -uo pipefail
 here="$(cd "$(dirname "$0")" && pwd)"
-qs="$(dirname "$here")"                                # config/desktop/quickshell
+qs="$(dirname "$here")"                                # quickshell
 if [ "${1:-}" != "--inner" ]; then
   # private session bus so the notification service never fights your real mako/panel
   dbus-run-session -- "$0" --inner "$@" 2>&1 | grep -avE 'dbus-daemon|xdg-desktop-portal|discover_other_daemon|^$'

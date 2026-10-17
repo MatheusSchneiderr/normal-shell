@@ -51,7 +51,7 @@ PanelWindow {
       anchors.bottomMargin: Theme.barHeight
       width: Theme.popupWidth
       height: body.item ? body.item.implicitHeight + Theme.popupPadding * 2 : 60
-      color: Theme.bg
+      color: Theme.fillWindow
       visible: body.item !== null && body.item.ready !== false
 
       MouseArea { anchors.fill: parent }

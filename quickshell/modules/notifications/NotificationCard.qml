@@ -14,12 +14,12 @@ Rectangle {
   signal dismissed()
 
   readonly property color tint: notification.urgency === NotificationUrgency.Critical ? Theme.danger
-    : notification.urgency === NotificationUrgency.Low ? Theme.muted : Theme.accent
+    : notification.urgency === NotificationUrgency.Low ? Theme.lineDivider : Theme.fillPrimary
   readonly property string picture: notification.image !== "" ? notification.image
     : notification.appIcon !== "" ? Quickshell.iconPath(notification.appIcon, "dialog-information") : ""
 
   implicitHeight: content.implicitHeight + Theme.spaceMd * 2
-  color: toast ? Theme.bg : Theme.surface
+  color: toast ? Theme.fillWindow : Theme.fillCard
 
   MouseArea {
     id: area
@@ -63,11 +63,13 @@ Rectangle {
 
       RowLayout {
         Layout.fillWidth: true
-        Label { text: card.notification.appName; color: Theme.muted; font.pixelSize: Theme.fontSmall; Layout.fillWidth: true; elide: Text.ElideRight }
-        Label { text: Notifs.stamp(card.notification); color: Theme.muted; font.pixelSize: Theme.fontSmall }
-        Label {
+        Label { text: card.notification.appName; color: Theme.textHint; font.pixelSize: Theme.fontSmall; Layout.fillWidth: true; elide: Text.ElideRight }
+        Label { text: Notifs.stamp(card.notification); color: Theme.textHint; font.pixelSize: Theme.fontSmall }
+        Glyph {
+          horizontalAlignment: Text.AlignLeft
+          Layout.preferredWidth: -1
           text: Icons.close
-          color: closeArea.containsMouse ? Theme.bright : Theme.muted
+          color: closeArea.containsMouse ? Theme.iconBody : Theme.iconDim
           font.pixelSize: Theme.fontBody
           MouseArea { id: closeArea; anchors.fill: parent; anchors.margins: -6; hoverEnabled: true; onClicked: card.dismissed() }
         }
@@ -75,7 +77,7 @@ Rectangle {
       Label {
         visible: text !== ""
         text: card.notification.summary
-        color: Theme.bright
+        color: Theme.textTitle
         font.bold: true
         wrapMode: Text.Wrap
         maximumLineCount: 2

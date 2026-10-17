@@ -126,7 +126,7 @@ ColumnLayout {
     Label {
       Layout.fillWidth: true
       text: root.name + "   " + Nm.typeLabel(root.type)
-      color: Theme.bright
+      color: Theme.textTitle
       font.pixelSize: Theme.fontLarge
       font.bold: true
       elide: Text.ElideRight
@@ -268,7 +268,7 @@ ColumnLayout {
   Label {
     visible: root.isVpn
     text: root.get("vpn.service-type") + "\n" + root.get("vpn.data").replace(/,\s*/g, "\n")
-    color: Theme.muted
+    color: Theme.textHint
     wrapMode: Text.Wrap
     Layout.fillWidth: true
   }

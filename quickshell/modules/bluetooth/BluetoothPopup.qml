@@ -36,28 +36,28 @@ ColumnLayout {
       anchors.leftMargin: Theme.spaceSm
       anchors.rightMargin: Theme.spaceSm
       spacing: Theme.spaceMd
-      Glyph { text: Bt.glyph(device.icon); color: device.connected ? Theme.accent : Theme.fg }
+      Glyph { text: Bt.glyph(device.icon); color: device.connected ? Theme.selected : Theme.iconBody }
       Label {
         Layout.fillWidth: true
         text: device.name
         elide: Text.ElideRight
-        color: device.connected ? Theme.accent : Theme.fg
+        color: device.connected ? Theme.selected : Theme.textBody
       }
       Label {
         visible: device.connected && device.batteryAvailable
         text: Math.round(device.battery * 100) + "%"
-        color: Theme.muted
+        color: Theme.textHint
         font.pixelSize: Theme.fontSmall
       }
       Label {
         text: Bt.stateText(device)
-        color: Theme.muted
+        color: Theme.textHint
         font.pixelSize: Theme.fontSmall
       }
       Glyph {
         visible: item.paired && item.highlighted
         text: Icons.trash
-        color: forgetArea.containsMouse ? Theme.danger : Theme.muted
+        color: forgetArea.containsMouse ? Theme.danger : Theme.iconDim
         MouseArea { id: forgetArea; anchors.fill: parent; anchors.margins: -Theme.spaceSm; hoverEnabled: true; onClicked: device.forget() }
       }
     }
@@ -84,7 +84,7 @@ ColumnLayout {
   Label {
     visible: root.powered && root.known.length === 0
     text: "No paired devices"
-    color: Theme.muted
+    color: Theme.textHint
     Layout.leftMargin: Theme.spaceSm
   }
 

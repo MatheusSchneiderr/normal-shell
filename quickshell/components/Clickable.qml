@@ -5,7 +5,7 @@ Rectangle {
   id: root
   signal activated()
   property color idleColor: "transparent"
-  property color hoverColor: Theme.hover
+  property color hoverColor: Theme.fillHover
   readonly property bool hovered: area.containsMouse
   readonly property bool highlighted: area.containsMouse || activeFocus
 

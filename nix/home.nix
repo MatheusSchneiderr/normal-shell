@@ -61,6 +61,8 @@ in
     grim
     slurp
     swappy
+    wl-clipboard
+    tumbler
     wlr-randr
     pulseaudio
   ];

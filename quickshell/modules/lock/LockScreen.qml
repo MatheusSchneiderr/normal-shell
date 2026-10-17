@@ -82,7 +82,7 @@ Scope {
 
     WlSessionLockSurface {
       id: surface
-      color: Theme.bg
+      color: Theme.fillWindow
 
       Item {
         anchors.fill: parent
@@ -97,7 +97,7 @@ Scope {
           asynchronous: true
         }
 
-        Rectangle { anchors.fill: parent; color: Theme.bg; opacity: root.shotReady ? 0.75 : 1.0 }
+        Rectangle { anchors.fill: parent; color: Theme.fillWindow; opacity: root.shotReady ? 0.75 : 1.0 }
 
         SystemClock { id: tick; precision: Prefs.showSeconds ? SystemClock.Seconds : SystemClock.Minutes }
 
@@ -109,7 +109,7 @@ Scope {
           Label {
             Layout.alignment: Qt.AlignHCenter
             text: Qt.formatDateTime(tick.date, Prefs.timeFormat)
-            color: Theme.bright
+            color: Theme.textTitle
             font.pixelSize: Theme.fontDisplay * 2.4
             font.bold: true
           }
@@ -117,20 +117,22 @@ Scope {
             Layout.alignment: Qt.AlignHCenter
             Layout.bottomMargin: Theme.spaceLg * 2
             text: Qt.formatDate(tick.date, "dddd, d MMMM")
-            color: Theme.fg
+            color: Theme.textBody
             font.pixelSize: Theme.fontLarge
           }
 
-          Label {
+          Glyph {
             Layout.alignment: Qt.AlignHCenter
+            Layout.preferredWidth: -1
+            horizontalAlignment: Text.AlignLeft
             text: Icons.user
-            color: Theme.accent
+            color: Theme.selected
             font.pixelSize: Theme.fontDisplay
           }
           Label {
             Layout.alignment: Qt.AlignHCenter
             text: root.user
-            color: Theme.bright
+            color: Theme.textTitle
             font.pixelSize: Theme.fontLarge
             Layout.bottomMargin: Theme.spaceMd
           }
@@ -182,7 +184,7 @@ Scope {
           visible: UPower.displayDevice && UPower.displayDevice.isPresent
           Label {
             text: (UPower.displayDevice.state === UPowerDeviceState.Charging ? Icons.bolt + " " : Icons.batteryFull + " ") + Math.round(UPower.displayDevice.percentage * 100) + "%"
-            color: UPower.displayDevice.percentage < 0.15 ? Theme.danger : Theme.fg
+            color: UPower.displayDevice.percentage < 0.15 ? Theme.danger : Theme.textBody
             font.pixelSize: Theme.fontBody
           }
         }

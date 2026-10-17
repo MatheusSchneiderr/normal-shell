@@ -17,6 +17,6 @@ Clickable {
     anchors.right: parent.right
     text: (parent.current ? Icons.check + "  " : "     ") + parent.text
     elide: Text.ElideRight
-    color: parent.current ? Theme.accent : Theme.fg
+    color: parent.current ? Theme.selected : Theme.textBody
   }
 }

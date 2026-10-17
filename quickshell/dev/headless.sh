@@ -2,7 +2,7 @@
 # Safe test compositor: a headless Wayfire that never touches your real session.
 # Usage: dev/headless.sh start|stop|env      (env prints WAYLAND_DISPLAY / WAYFIRE_SOCKET exports)
 set -euo pipefail
-root="$(cd "$(dirname "$0")/../.." && pwd)"          # config/desktop
+root="$(cd "$(dirname "$0")/../.." && pwd)"          # repo root
 ini="$root/compositor/wayfire.ini"
 state="${XDG_RUNTIME_DIR:?}/qs-dev"
 mkdir -p "$state"

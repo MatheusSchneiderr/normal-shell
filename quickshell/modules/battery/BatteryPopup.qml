@@ -34,17 +34,17 @@ ColumnLayout {
     spacing: Theme.spaceMd
     Label {
       text: Math.round((root.bat ? root.bat.percentage : 0) * 100) + "%"
-      color: (root.bat && root.bat.percentage < 0.15 && root.bat.state !== UPowerDeviceState.Charging) ? Theme.danger : Theme.fg
+      color: (root.bat && root.bat.percentage < 0.15 && root.bat.state !== UPowerDeviceState.Charging) ? Theme.danger : Theme.textBody
       font.pixelSize: Theme.fontDisplay
       font.bold: true
     }
     ColumnLayout {
       spacing: 0
-      Label { text: root.statusLine(); color: Theme.fg;font.pixelSize: Theme.fontBody }
+      Label { text: root.statusLine(); color: Theme.textBody;font.pixelSize: Theme.fontBody }
       Label {
         visible: root.bat && root.bat.healthSupported
         text: "Health " + Math.round(root.bat ? root.bat.healthPercentage : 0) + "%"
-        color: Theme.muted
+        color: Theme.textHint
         font.pixelSize: Theme.fontSmall
       }
     }
@@ -65,13 +65,13 @@ ColumnLayout {
       Label {
         Layout.fillWidth: true
         text: modelData.model || "Device"
-        color: Theme.fg
+        color: Theme.textBody
         font.pixelSize: Theme.fontBody
         elide: Text.ElideRight
       }
       Label {
         text: Math.round(modelData.percentage * 100) + "%"
-        color: Theme.fg
+        color: Theme.textBody
         font.pixelSize: Theme.fontBody
       }
     }

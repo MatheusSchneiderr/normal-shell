@@ -32,7 +32,7 @@ Scope {
       implicitWidth: hint.implicitWidth + Theme.spaceLg * 2
       implicitHeight: Theme.buttonHeight
       exclusionMode: ExclusionMode.Ignore
-      color: Theme.bg
+      color: Theme.fillWindow
       WlrLayershell.layer: WlrLayer.Overlay
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 

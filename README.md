@@ -3,9 +3,9 @@
 A small, keyboard-friendly floating desktop for NixOS, built from two parts:
 
 - **Wayfire** as the compositor (`compositor/`): floating windows, thin borders, workspaces on a 2x2 grid, a few Lua scripts for the keys.
-- **Quickshell** as the shell (`quickshell/`): panel, start menu, a centered app launcher, tray popups, a Settings app, lock screen, notifications, the wallpaper and a screen-share picker. All QML, no daemons of its own.
+- **Quickshell** as the shell (`quickshell/`): panel, start menu, a centered app launcher, tray popups, a Settings app, lock screen with a blurred backdrop, notifications, the wallpaper, a screenshot tool and a screen-share picker. All QML, no daemons of its own.
 
-It is meant to feel like a lightweight KDE without Plasma: a taskbar with a start menu, a workspace pager, tray popups for Wi-Fi, sound, Bluetooth, battery, clipboard history and calendar, and a Settings window.
+It is meant to feel like a lightweight KDE without Plasma: a taskbar with a start menu, a workspace pager, tray popups for Wi-Fi, sound, Bluetooth, battery, clipboard history and calendar, and a Settings window where you pick colors, fonts, the wallpaper, the keyboard layout and more.
 
 | Start menu | Launcher (`Super+Esc`) |
 |---|---|
@@ -14,6 +14,8 @@ It is meant to feel like a lightweight KDE without Plasma: a taskbar with a star
 | ![Appearance](screenshots/page-appearance.png) | ![Calendar](screenshots/popup-calendar.png) |
 | **Lock screen** | **Battery and brightness** |
 | ![Lock screen](screenshots/lock.png) | ![Battery](screenshots/popup-battery.png) |
+| **Settings: Screenshots** | |
+| ![Screenshots](screenshots/page-screenshots.png) | |
 
 ## Install (NixOS + home-manager)
 
@@ -56,7 +58,7 @@ Edit these before the first login. The defaults are for a Brazilian keyboard on 
 | Default keyboard layout, screen mode and scale, cursor theme | `compositor/wayfire.ini` (`[input]`, `[output:eDP-1]`) |
 | Palette (16 colors) and default font | `quickshell/theme.json` |
 | Terminal and file manager | `[command]` in `compositor/wayfire.ini` (`foot`, `thunar`) |
-| Which palette color each part uses, font and text size, wallpaper, keyboard layout, time zone, session language | Settings (saved in `~/.config/quickshell/prefs.json`) |
+| Which palette color each part uses, font and text size, wallpaper, keyboard layout, time zone, session language, screenshot folder | Settings (saved in `~/.config/quickshell/prefs.json`) |
 
 After changing `theme.json`, reload the panel without restarting it:
 
@@ -91,7 +93,7 @@ The pieces are plain files, so you can wire them up by hand: link `quickshell/` 
 | `Alt+Tab` | Switch windows |
 | `Super+W` | Overview of windows |
 | `Ctrl+1..4`, `Alt+1..4` | Go to workspace, send window to workspace |
-| `Print`, `Super+Print` | Screenshot a region / the screen |
+| `Print`, `Super+Print` | Screenshot a region / the screen: saved to `~/Pictures/Screenshots`, copied to the clipboard, then opened in an editor |
 
 The full list is in `compositor/wayfire.ini`.
 

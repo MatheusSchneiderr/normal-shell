@@ -33,7 +33,7 @@ Item {
   Clickable {
     id: head
     anchors.fill: parent
-    idleColor: Theme.surface
+    idleColor: Theme.fillCard
     onActivated: root.expanded = !root.expanded
     Rectangle {
       id: headSwatch
@@ -45,7 +45,7 @@ Item {
       height: Theme.swatchSize
       color: root.currentSwatch !== undefined ? root.currentSwatch : "transparent"
       border.width: 1
-      border.color: Theme.muted
+      border.color: Theme.lineDivider
     }
     Label {
       anchors.verticalCenter: parent.verticalCenter
@@ -61,7 +61,7 @@ Item {
       anchors.right: parent.right
       anchors.rightMargin: Theme.spaceSm
       text: root.expanded ? Icons.caretUp : Icons.caretDown
-      color: Theme.muted
+      color: Theme.iconDim
     }
   }
 
@@ -97,7 +97,7 @@ Item {
       Rectangle {
         id: panel
         height: Math.min(list.contentHeight, root.maxRows * Theme.rowHeight)
-        color: Theme.surface
+        color: Theme.fillCard
 
         ListView {
           id: list
@@ -110,7 +110,7 @@ Item {
             required property var modelData
             width: list.width
             height: Theme.rowHeight
-            idleColor: Theme.surface
+            idleColor: Theme.fillCard
             onActivated: root.choose(modelData.value)
             Keys.onEscapePressed: root.expanded = false
             Keys.onDownPressed: { const n = nextItemInFocusChain(true); if (n) n.forceActiveFocus() }
@@ -125,14 +125,14 @@ Item {
               height: Theme.swatchSize
               color: modelData.swatch !== undefined ? modelData.swatch : "transparent"
               border.width: 1
-              border.color: Theme.muted
+              border.color: Theme.lineDivider
             }
             Label {
               anchors.verticalCenter: parent.verticalCenter
               anchors.left: rowSwatch.visible ? rowSwatch.right : parent.left
               anchors.leftMargin: Theme.spaceMd
               text: modelData.label
-              color: modelData.value === root.value ? Theme.accent : Theme.fg
+              color: modelData.value === root.value ? Theme.selected : Theme.textBody
             }
           }
         }

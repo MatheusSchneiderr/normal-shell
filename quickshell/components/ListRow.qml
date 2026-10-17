@@ -21,17 +21,17 @@ Clickable {
     spacing: Theme.spaceMd
     Glyph {
       text: item.glyph
-      color: item.selected ? Theme.accent : Theme.fg
+      color: item.selected ? Theme.selected : Theme.iconBody
     }
     Label {
       Layout.fillWidth: true
       text: item.title
       elide: Text.ElideRight
-      color: item.selected ? Theme.accent : Theme.fg
+      color: item.selected ? Theme.selected : Theme.textBody
     }
     Label {
       text: item.subtitle
-      color: Theme.muted
+      color: Theme.textHint
       font.pixelSize: Theme.fontSmall
     }
   }

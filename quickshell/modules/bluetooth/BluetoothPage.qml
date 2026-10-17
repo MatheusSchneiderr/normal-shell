@@ -27,7 +27,7 @@ SettingsPage {
   Cmd { id: alias }
 
   SectionHeader { text: "ADAPTER" }
-  Label { visible: root.adapter === null; text: "No Bluetooth adapter found"; color: Theme.muted }
+  Label { visible: root.adapter === null; text: "No Bluetooth adapter found"; color: Theme.textHint }
 
   FormRow {
     visible: root.adapter !== null
@@ -72,7 +72,7 @@ SettingsPage {
   }
 
   SectionHeader { text: "MY DEVICES"; visible: root.powered }
-  Label { visible: root.powered && root.known.length === 0; text: "No paired devices"; color: Theme.muted }
+  Label { visible: root.powered && root.known.length === 0; text: "No paired devices"; color: Theme.textHint }
 
   Repeater {
     model: root.powered ? root.known : []
@@ -109,7 +109,7 @@ SettingsPage {
         spacing: Theme.spaceSm
 
         Label {
-          color: Theme.muted
+          color: Theme.textHint
           lineHeight: 1.3
           text: "Address    " + modelData.address + "\nType       " + Bt.kind(modelData.icon)
             + (modelData.deviceName !== modelData.name ? "\nOriginal   " + modelData.deviceName : "")
@@ -151,7 +151,7 @@ SettingsPage {
       primary: !(root.adapter && root.adapter.discovering)
       onActivated: root.adapter.discovering = !root.adapter.discovering
     }
-    Label { visible: root.adapter && root.adapter.discovering; text: "Searching..."; color: Theme.muted }
+    Label { visible: root.adapter && root.adapter.discovering; text: "Searching..."; color: Theme.textHint }
   }
   Repeater {
     model: root.powered ? root.found : []

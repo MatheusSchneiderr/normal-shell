@@ -25,7 +25,7 @@ PanelWindow {
   exclusionMode: ExclusionMode.Normal
   WlrLayershell.layer: WlrLayer.Bottom
   exclusiveZone: Theme.barHeight
-  color: Theme.bg
+  color: Theme.fillWindow
 
   IdleInhibitor { window: panel; enabled: Battery.keepAwake }
 
@@ -37,10 +37,10 @@ PanelWindow {
     Item {
       Layout.fillHeight: true
       Layout.preferredWidth: Theme.startButtonWidth
-      Label {
-        anchors.centerIn: parent
+      Glyph {
+        centered: true
         text: Icons.nix
-        color: (startArea.containsMouse || Ui.menuOpen) ? Theme.accent : Theme.fg
+        color: (startArea.containsMouse || Ui.menuOpen) ? Theme.selected : Theme.iconBody
         font.pixelSize: Theme.iconLarge
       }
       MouseArea {
@@ -107,7 +107,7 @@ PanelWindow {
     Rectangle {
       Layout.fillHeight: true
       Layout.preferredWidth: Theme.showDesktopWidth
-      color: showArea.containsMouse ? Theme.accent : Theme.surface
+      color: showArea.containsMouse ? Theme.fillPrimary : Theme.fillCard
       MouseArea {
         id: showArea
         anchors.fill: parent

@@ -9,7 +9,7 @@ Rectangle {
 
   Layout.fillWidth: true
   implicitHeight: label.implicitHeight + Theme.spaceMd * 2
-  color: Theme.surface
+  color: Theme.fillCard
 
   Rectangle {
     anchors.left: parent.left

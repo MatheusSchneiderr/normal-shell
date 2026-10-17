@@ -2,7 +2,7 @@ import QtQuick
 import qs
 
 Label {
-  color: Theme.muted
+  color: Theme.textHint
   font.pixelSize: Theme.fontSmall
   font.bold: true
 }

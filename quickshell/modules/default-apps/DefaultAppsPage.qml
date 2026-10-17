@@ -81,11 +81,11 @@ SettingsPage {
 
   Label {
     text: "Choose which application opens each kind of file or link. Changes apply immediately."
-    color: Theme.muted
+    color: Theme.textHint
     wrapMode: Text.Wrap
     Layout.fillWidth: true
   }
-  Label { visible: !root.loaded; text: "Loading..."; color: Theme.muted }
+  Label { visible: !root.loaded; text: "Loading..."; color: Theme.textHint }
 
   SectionHeader { text: "COMMON"; visible: root.loaded }
   Repeater {
@@ -125,6 +125,6 @@ SettingsPage {
   Label {
     visible: root.loaded && root.allMimes.length > root.shownMimes.length
     text: "Showing the first " + root.shownMimes.length + " of " + root.allMimes.length + " types. Use the search to narrow it down."
-    color: Theme.muted
+    color: Theme.textHint
   }
 }

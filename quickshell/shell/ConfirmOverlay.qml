@@ -10,7 +10,7 @@ Rectangle {
   signal confirmed()
   signal cancelled()
 
-  color: Theme.bg
+  color: Theme.fillWindow
 
   function focusConfirm() { confirmButton.forceActiveFocus() }
 
@@ -27,7 +27,7 @@ Rectangle {
     Label {
       Layout.alignment: Qt.AlignHCenter
       text: "Automatically in " + root.countdown + " seconds"
-      color: Theme.muted
+      color: Theme.textHint
     }
     RowLayout {
       Layout.alignment: Qt.AlignHCenter

@@ -18,7 +18,7 @@ ColumnLayout {
     property string iconOn: Icons.volumeHigh
     property string iconMuted: Icons.volumeMute
     glyph: node.audio.muted ? iconMuted : iconOn
-    glyphColor: node.audio.muted ? Theme.danger : Theme.fg
+    glyphColor: node.audio.muted ? Theme.danger : Theme.iconBody
     value: node.audio.volume
     valueText: Audio.percent(node.audio.volume)
     onGlyphClicked: node.audio.muted = !node.audio.muted

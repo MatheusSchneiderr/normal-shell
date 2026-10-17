@@ -21,7 +21,7 @@ RowLayout {
     Label {
       visible: root.hint !== ""
       text: root.hint
-      color: Theme.muted
+      color: Theme.textHint
       font.pixelSize: Theme.fontSmall
       wrapMode: Text.Wrap
       Layout.fillWidth: true

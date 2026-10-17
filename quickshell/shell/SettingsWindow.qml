@@ -7,7 +7,7 @@ import qs.components
 FloatingWindow {
   id: win
   title: "Settings"
-  color: Theme.bg
+  color: Theme.fillWindow
   implicitWidth: Theme.settingsWidth
   implicitHeight: Theme.settingsHeight
   minimumSize: Qt.size(760, 480)
@@ -23,6 +23,7 @@ FloatingWindow {
     { id: "bluetooth", label: "Bluetooth", icon: Icons.bluetooth, file: "../modules/bluetooth/BluetoothPage.qml" },
     { id: "apps", label: "Default apps", icon: Icons.apps, file: "../modules/default-apps/DefaultAppsPage.qml" },
     { id: "appearance", label: "Appearance", icon: Icons.image, file: "../modules/appearance/AppearancePage.qml" },
+    { id: "screenshots", label: "Screenshots", icon: Icons.camera, file: "../modules/screenshot/ScreenshotPage.qml" },
     { id: "datetime", label: "Date & time", icon: Icons.clock, file: "../modules/calendar/DateTimePage.qml" },
     { id: "printers", label: "Printers", icon: Icons.printer, file: "../modules/printers/PrintersPage.qml" }
   ]
@@ -48,7 +49,7 @@ FloatingWindow {
       anchors.top: parent.top
       anchors.bottom: parent.bottom
       width: Theme.sidebarWidth
-      color: Theme.surface
+      color: Theme.fillCard
 
       ColumnLayout {
         anchors.fill: parent
@@ -57,7 +58,7 @@ FloatingWindow {
 
         Label {
           text: "Settings"
-          color: Theme.bright
+          color: Theme.textTitle
           font.pixelSize: Theme.fontLarge
           font.bold: true
           Layout.leftMargin: Theme.spaceSm

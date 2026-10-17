@@ -19,7 +19,7 @@ Scope {
       screen: modelData
       anchors { top: true; bottom: true; left: true; right: true }
       exclusionMode: ExclusionMode.Ignore
-      color: Theme.bg
+      color: Theme.fillWindow
       WlrLayershell.layer: WlrLayer.Background
       WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
       WlrLayershell.namespace: "wallpaper"

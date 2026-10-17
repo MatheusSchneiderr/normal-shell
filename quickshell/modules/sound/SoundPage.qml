@@ -27,7 +27,7 @@ SettingsPage {
   PwObjectTracker { objects: [root.sink, root.source] }
 
   SectionHeader { text: "OUTPUT" }
-  Label { visible: !root.sink; text: "No output device"; color: Theme.muted }
+  Label { visible: !root.sink; text: "No output device"; color: Theme.textHint }
 
   FormRow {
     visible: root.sink !== null
@@ -79,7 +79,7 @@ SettingsPage {
   }
 
   SectionHeader { text: "INPUT" }
-  Label { visible: !root.source; text: "No input device"; color: Theme.muted }
+  Label { visible: !root.source; text: "No input device"; color: Theme.textHint }
 
   FormRow {
     visible: root.source !== null
@@ -139,7 +139,7 @@ SettingsPage {
       Layout.fillWidth: true
       spacing: Theme.spaceXs
       PwObjectTracker { objects: [modelData] }
-      Label { text: modelData.properties["application.name"] || Audio.label(modelData); color: Theme.bright }
+      Label { text: modelData.properties["application.name"] || Audio.label(modelData); color: Theme.textTitle }
       RowLayout {
         Layout.fillWidth: true
         spacing: Theme.spaceMd

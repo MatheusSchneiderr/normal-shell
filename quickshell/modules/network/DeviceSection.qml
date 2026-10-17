@@ -34,7 +34,7 @@ ColumnLayout {
         Layout.leftMargin: Theme.spaceLg * 2
         Layout.topMargin: Theme.spaceXs
         Layout.bottomMargin: Theme.spaceSm
-        color: Theme.muted
+        color: Theme.textHint
         lineHeight: 1.3
         text: "MAC       " + (info["GENERAL.HWADDR"] || "-")
           + "\nMTU       " + (info["GENERAL.MTU"] || "-")

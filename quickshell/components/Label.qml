@@ -2,7 +2,7 @@ import QtQuick
 import qs
 
 Text {
-  color: Theme.fg
+  color: Theme.textBody
   font.family: Theme.font
   font.pixelSize: Theme.fontBody
 }

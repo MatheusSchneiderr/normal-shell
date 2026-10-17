@@ -31,5 +31,8 @@ for f in $(find . -name '*.qml'); do
 done
 find . -name 'Region.qml' -o -name 'State.qml' | while read -r f; do report "reserved type name: $f"; done
 
+# 8. color tokens only on the kind of element they belong to (text, icon, fill, line)
+while IFS= read -r l; do report "color token: $l"; done < <(lua dev/token-kinds.lua .)
+
 [ $fail -eq 0 ] && echo "check.sh: ok"
 exit $fail

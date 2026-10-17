@@ -8,6 +8,6 @@ StatusButton {
   readonly property var wifi: Networking.devices.values.find(d => d.type === 1)
 
   glyph: !Networking.wifiEnabled ? Icons.airplane : Icons.wifi
-  tint: (!Networking.wifiEnabled || !wifi || !wifi.connected) ? Theme.muted : Theme.fg
+  dim: !Networking.wifiEnabled || !wifi || !wifi.connected
   popup: "network"
 }

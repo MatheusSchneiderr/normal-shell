@@ -24,7 +24,7 @@ Item {
 
       Label {
         text: root.title
-        color: Theme.bright
+        color: Theme.textTitle
         font.pixelSize: Theme.fontTitle
         font.bold: true
         Layout.bottomMargin: Theme.spaceSm
@@ -38,6 +38,6 @@ Item {
     width: 4
     height: flick.height * flick.height / flick.contentHeight
     y: flick.contentHeight > flick.height ? flick.height * flick.contentY / flick.contentHeight : 0
-    color: Theme.muted
+    color: Theme.lineDivider
   }
 }

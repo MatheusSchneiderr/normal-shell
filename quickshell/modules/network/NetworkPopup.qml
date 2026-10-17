@@ -31,7 +31,7 @@ ColumnLayout {
 
   StatusMessage { text: Nm.message; font.pixelSize: Theme.fontSmall }
 
-  Label { visible: Nm.wifiOn && !Nm.scanned; Layout.leftMargin: Theme.spaceSm; text: "Scanning..."; color: Theme.muted }
+  Label { visible: Nm.wifiOn && !Nm.scanned; Layout.leftMargin: Theme.spaceSm; text: "Scanning..."; color: Theme.textHint }
 
   WifiList { visible: Nm.wifiOn; maxHeight: Theme.popupListHeight }
 

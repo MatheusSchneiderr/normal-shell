@@ -5,7 +5,7 @@ import qs
 RowLayout {
   id: root
   property string glyph: ""
-  property color glyphColor: Theme.fg
+  property color glyphColor: Theme.iconBody
   property real value: 0
   property real maximum: 1.0
   property int steps: 0
@@ -18,10 +18,10 @@ RowLayout {
 
   Clickable {
     visible: root.glyph !== ""
-    Layout.preferredWidth: Theme.iconSlot + Theme.spaceSm
+    Layout.preferredWidth: Theme.rowHeight
     Layout.preferredHeight: Theme.rowHeight
     onActivated: root.glyphClicked()
-    Glyph { anchors.centerIn: parent; text: root.glyph; color: root.glyphColor }
+    Glyph { centered: true; text: root.glyph; color: root.glyphColor }
   }
 
   Slider {

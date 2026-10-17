@@ -27,12 +27,12 @@ Item {
     anchors.verticalCenter: parent.verticalCenter
     width: parent.width
     height: Theme.trackHeight
-    color: Theme.hover
+    color: Theme.fillHover
 
     Rectangle {
       width: root.knobVisible ? root.knob / 2 + (root.width - root.knob) * root.fraction : root.width * root.fraction
       height: parent.height
-      color: Theme.accent
+      color: Theme.fillPrimary
     }
   }
 
@@ -44,7 +44,7 @@ Item {
       anchors.verticalCenter: parent.verticalCenter
       width: 2
       height: Theme.tickHeight
-      color: Theme.muted
+      color: Theme.lineDivider
       z: -1
     }
   }
@@ -56,7 +56,7 @@ Item {
     radius: root.knob / 2
     x: (root.width - root.knob) * root.fraction
     anchors.verticalCenter: parent.verticalCenter
-    color: (area.pressed || area.containsMouse || root.activeFocus) ? Theme.accent : Theme.fg
+    color: (area.pressed || area.containsMouse || root.activeFocus) ? Theme.fillPrimary : Theme.textBody
   }
 
   MouseArea {

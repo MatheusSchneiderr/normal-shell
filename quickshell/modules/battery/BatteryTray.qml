@@ -12,6 +12,6 @@ StatusButton {
   visible: bat && bat.isPresent
   glyph: charging ? Icons.bolt : (pct > 0.875 ? Icons.batteryFull : pct > 0.625 ? Icons.batteryThreeQuarters : pct > 0.375 ? Icons.batteryHalf : pct > 0.125 ? Icons.batteryQuarter : Icons.batteryEmpty)
   label: Math.round(pct * 100) + "%"
-  tint: (pct < 0.15 && !charging) ? Theme.danger : Theme.fg
+  alert: pct < 0.15 && !charging
   popup: "battery"
 }

@@ -44,7 +44,7 @@ SettingsPage {
     DeviceSection {}
 
     SectionHeader { text: "WI-FI NETWORKS"; visible: Nm.wifiOn }
-    Label { visible: Nm.wifiOn && !Nm.scanned; text: "Scanning..."; color: Theme.muted }
+    Label { visible: Nm.wifiOn && !Nm.scanned; text: "Scanning..."; color: Theme.textHint }
     WifiList { visible: Nm.wifiOn; showForget: true; showBand: true }
     RowLayout {
       visible: Nm.wifiOn
@@ -65,7 +65,7 @@ SettingsPage {
     }
 
     SectionHeader { text: "SAVED CONNECTIONS" }
-    Label { visible: Nm.savedProfiles.length === 0; text: "None"; color: Theme.muted }
+    Label { visible: Nm.savedProfiles.length === 0; text: "None"; color: Theme.textHint }
     Repeater {
       model: Nm.savedProfiles
       delegate: ListRow {

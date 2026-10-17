@@ -39,9 +39,9 @@ ColumnLayout {
       visible: root.showSettings
       Layout.preferredWidth: Theme.buttonHeight
       Layout.preferredHeight: Theme.buttonHeight
-      idleColor: Theme.surface
+      idleColor: Theme.fillCard
       onActivated: root.settingsRequested()
-      Glyph { anchors.centerIn: parent; text: Icons.gear; color: Theme.accent }
+      Glyph { centered: true; text: Icons.gear; color: Theme.selected }
     }
   }
 
@@ -75,7 +75,7 @@ ColumnLayout {
       required property int index
       width: list.width
       height: Theme.startRowHeight
-      color: ListView.isCurrentItem ? Theme.hover : "transparent"
+      color: ListView.isCurrentItem ? Theme.fillHover : "transparent"
       RowLayout {
         anchors.fill: parent
         anchors.leftMargin: Theme.spaceMd
