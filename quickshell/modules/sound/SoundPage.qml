@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Services.Pipewire
 import qs
 import qs.components
+import qs.services
 
 SettingsPage {
   id: root

@@ -53,7 +53,15 @@ SettingsPage {
 }
 EOF
 
-echo "Created $dir. Now add:"
+cat > "services/${Name}.qml" <<EOF
+pragma Singleton
+import QtQuick
+
+QtObject {
+}
+EOF
+
+echo "Created $dir and services/${Name}.qml (the feature's state and commands). Now add:"
 echo "  shell/Panel.qml          : import qs.modules.$name   and   ${Name}Tray {}   in the tray row"
 echo "  shell/SettingsWindow.qml : { id: \"$name\", label: \"$Name\", icon: Icons.gear, file: \"../modules/$name/${Name}Page.qml\" }"
 echo "Popup name for IPC/keybindings: $name   (quickshell -c panel ipc call popup toggle $name)"

@@ -9,13 +9,13 @@ Before you finish:
 
 ## Where a file goes
 - Generic UI piece (button, toggle, field): `components/`
-- One feature (Wi-Fi, sound, lock...): `modules/<feature>/`
+- All logic, no UI (state, commands, polling, D-Bus, IPC): `services/`, whoever uses it
+- One feature's screens (tray button, popup, page): `modules/<feature>/`
 - The frame (panel, popup host, start menu, settings window): `shell/`
-- Shared logic with no UI: `services/`
 
 ## Rules
 1. Don't style raw `Text`/`TextInput` in modules. Use `Label`, `Glyph`, `TextField`, `Clickable`.
-2. A module imports only `components/`, `services/`, `Theme` and `Icons`, never another module. If two modules need the same thing, move it to `services/`.
+2. A module imports only `components/`, `services/`, `Theme` and `Icons`, never another module.
 3. No hex colours, pixel numbers or `\uXXXX` icons outside `Theme.qml` and `Icons.qml`.
 4. Run commands with `Cmd`, not `Process`. Only the Pager streams, so it is the exception.
 5. A feature's popup and its Settings page share parts (`WifiList`, `DeviceRow`). Don't copy blocks between files.
@@ -24,13 +24,13 @@ Before you finish:
 8. Gotchas: a file that imports `Quickshell.Io` can't use `Toggle`. Don't name a type `Region` or `State`, or an IPC function `show` or `call` (they clash with `quickshell ipc` subcommands). To center an icon in a button use `Glyph { centered: true }`, not `anchors.centerIn` (icons end up a few pixels off).
 
 ## Conventions
-- Module files: `<Name>Tray`, `<Name>Popup`, `<Name>Page`, and `<Name>` for a service.
+- Module files: `<Name>Tray`, `<Name>Popup`, `<Name>Page`. Its logic is `services/<Name>.qml`.
 - Popup name = lowercase module folder (`ipc call popup toggle network`). `PopupHost` loads `modules/<name>/<Name>Popup.qml`.
 - Tray button for a popup: `StatusButton { popup: "network" }`.
 - A service that polls uses `Poller` and has `hold()`/`release()`; the popup or page calls them.
 - `Panel.qml` and `SettingsWindow.qml` list tray buttons and pages by hand, in display order.
 - A long-lived service must not keep per-event data forever: cap it or prune it (notifications keep the newest 50).
-- Feature state lives in the feature. `services/Ui.qml` is only navigation (popup, start menu, settings).
+- State lives in `services/`. `services/Ui.qml` is only navigation (popup, start menu, settings).
 
 ## New feature
-Run `./new-module.sh <name>`, then add the two lines it prints.
+Run `./new-module.sh <name>`, then add the two lines it prints. Put its state and commands in `services/<Name>.qml`.

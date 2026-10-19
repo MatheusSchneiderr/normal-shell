@@ -7,9 +7,7 @@ import qs.modules.launcher
 import qs.modules.lock
 import qs.modules.notifications
 import qs.modules.screencast
-import qs.modules.screenshot
 import qs.modules.appearance
-import qs.modules.calendar
 import qs.modules.windows
 
 ShellRoot {

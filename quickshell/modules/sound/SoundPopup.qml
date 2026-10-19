@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell.Services.Pipewire
 import qs
 import qs.components
+import qs.services
 
 ColumnLayout {
   id: root

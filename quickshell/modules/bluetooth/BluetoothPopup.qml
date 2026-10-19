@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Bluetooth
 import qs
 import qs.components
+import qs.services
 
 ColumnLayout {
   id: root

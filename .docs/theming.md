@@ -59,4 +59,4 @@ So `compositor/theme.lua` sets the colors and font, then resizes each normal win
 Known limit: the title text color changes only when that window's title changes, and on new windows.
 
 The IPC method is `set-config-options`, plural.
-`modules/appearance/WayfireTheme.qml` runs the script at startup and on every pick.
+`services/WayfireTheme.qml` runs the script at startup and on every pick.

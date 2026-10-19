@@ -5,6 +5,7 @@ import Quickshell.Widgets
 import Quickshell.Services.Notifications
 import qs
 import qs.components
+import qs.services
 
 Rectangle {
   id: card

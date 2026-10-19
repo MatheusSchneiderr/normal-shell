@@ -2,6 +2,7 @@ import QtQuick
 import QtQuick.Layouts
 import qs
 import qs.components
+import qs.services
 
 SettingsPage {
   id: root
